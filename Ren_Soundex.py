@@ -1,13 +1,16 @@
 class soundexer:
     #length is the length of the soundex returned by the object
     def __init__(self, length=4):
-        self.DICT = {"1":("b", "f", "p", "v"),
-              "2":("c","g","j","k","q","s","x","z"),
-              "3":("d", "t"),
-              "4":("l"),
-              "5":("m", "n"),
-              "6":("r")}
+        self.DICT = {}
+        self.DICT.update(dict.fromkeys(["a", "e", "i", "o", "u", "y", "h", "w"], ""))
+        self.DICT.update(dict.fromkeys(["b", "f", "p", "v"], "1"))
+        self.DICT.update(dict.fromkeys(["c","g","j","k","q","s","x","z"], "2"))
+        self.DICT.update(dict.fromkeys(["d", "t"], "3"))
+        self.DICT.update(dict.fromkeys(["l"], "4"))
+        self.DICT.update(dict.fromkeys(["m", "n"], "5"))
+        self.DICT.update(dict.fromkeys(["r"], "6"))
         self.length = length
+        print(length)
 
     #builds a list and appends values according to the soundex algorithm
     #   and then joins that list at the end
@@ -21,10 +24,14 @@ class soundexer:
                     continue
                 if counter <= self.length:
                     tempSoundex.append(self.getNumber(x))
+            for x in range(self.length-counter):
+                tempSoundex.append("0")
         returnSoundex = "".join(tempSoundex)
         return returnSoundex
 
     #used in creating the soundex; returns the number from the dictionary
     def getNumber(self, string):
-        return self.DICT(string)
+        print(string)
+        print(self.DICT[string])
+        return self.DICT[string]
         

@@ -1,4 +1,4 @@
-import ren_soundex as soundex
+import Ren_Soundex as soundex
 import testclass
 s = soundex.soundexer()
-print(s.soundex("jason"))
+print(s.soundex("jjjjj"))
