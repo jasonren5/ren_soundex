@@ -10,28 +10,32 @@ class soundexer:
         self.DICT.update(dict.fromkeys(["m", "n"], "5"))
         self.DICT.update(dict.fromkeys(["r"], "6"))
         self.length = length
-        print(length)
 
     #builds a list and appends values according to the soundex algorithm
     #   and then joins that list at the end
     def soundex(self, string):
         counter = 0
-        if string != "":
-            tempSoundex = [string[0]]
-            for x in string:
+        returnSoundex = ""
+        if string == "":
+            return ""
+        tempSoundex = [string[0]]
+        for x in string:
+            if x in self.DICT:
                 counter += 1
                 if counter == 1:
                     continue
                 if counter <= self.length:
-                    tempSoundex.append(self.getNumber(x))
-            for x in range(self.length-counter):
-                tempSoundex.append("0")
+                    tempSoundex.append(self.getNumber(x.lower()))
+                    if (self.getNumber(x) == ""):
+                        counter += -1
+            else:
+                return "-1"
+        for x in range(self.length-counter):
+            tempSoundex.append("0")
         returnSoundex = "".join(tempSoundex)
         return returnSoundex
 
     #used in creating the soundex; returns the number from the dictionary
     def getNumber(self, string):
-        print(string)
-        print(self.DICT[string])
         return self.DICT[string]
         
