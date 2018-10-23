@@ -40,7 +40,7 @@ class soundexer:
                 tempSoundex.append("0")
                 counter -= 1
         returnSoundex = "".join(tempSoundex)
-        return returnSoundex, counter
+        return returnSoundex
 
     #used in creating the soundex; returns the number from the dictionary
     def getNum(self, string):
