@@ -29,7 +29,7 @@ class soundexer:
                     if (self.getNumber(x) == ""):
                         counter += -1
             else:
-                return "-1"
+                continue
         for x in range(self.length-counter):
             tempSoundex.append("0")
         returnSoundex = "".join(tempSoundex)
