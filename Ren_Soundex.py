@@ -28,18 +28,19 @@ class soundexer:
                     #else if x in dict, multiple consecutive letters w/ same number, and letters w same number not separated with h or w
                 elif x in self.DICT and self.getNum(x.lower()) != self.getNum(prev) and ((self.getNum(x.lower()) != tempSoundex[len(tempSoundex)-1]) and (prev != "h" and prev !="w")):
                     if counter > 0:
-                        #if not ((self.getNum(x.lower()) == tempSoundex[len(tempSoundex)-1]) or self.getNum(x.lower()) == self.getNum(prev)) and prevCounter == counter:
-                        tempSoundex.append(self.getNum(x.lower()))
-                        counter -= 1
+                        appendChar = self.getNum(x.lower())
+                        tempSoundex.append(appendChar)
+                        if (appendChar != ""):
+                            counter -= 1
                 prev = x.lower()
             if counter == 0:
                 break
         if len(tempSoundex) > 0:
-            while counter >= 0:
+            while counter > 0:
                 tempSoundex.append("0")
                 counter -= 1
         returnSoundex = "".join(tempSoundex)
-        return returnSoundex
+        return returnSoundex, counter
 
     #used in creating the soundex; returns the number from the dictionary
     def getNum(self, string):
